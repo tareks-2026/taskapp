@@ -9,7 +9,7 @@
                 Übersicht
             </a>
             <span class="text-sm opacity-80"> Log in </span>
-            <span class="btn btn-primary btn-sm"> Register </span>
+            <span class="btn btn-primary btn-sm"><a href="{{ route('register') }}"> Register </a></span>
         </div>
     </nav>
 </header>
