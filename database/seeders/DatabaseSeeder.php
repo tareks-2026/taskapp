@@ -26,6 +26,11 @@ class DatabaseSeeder extends Seeder
         $tasks = [
             ['title' => 'IT Basics', 'description' => 'Grundlegende Programmierung', 'done' => true],
             ['title' => 'Laravel Basics', 'description' => 'Routing und Controller in Laravel', 'done' => true],
+            ['title' => 'Java Basics', 'description' => 'Grundlegende Java-Konzepte', 'done' => true],
+            ['title' => 'It Professionels', 'description' => 'Vertiefung Programmierung allgemein', 'done' => true],
+            ['title' => 'Laravel Professionels', 'description' => 'Vertiefung Laravel', 'done' => true],
+            ['title' => 'Java Professionels', 'description' => 'Vertiefung Java', 'done' => true],
+
             ['title' => 'Zugriffe in Laravel', 'description' => 'Authorisierung und Gruppierung in Laravel', 'done' => false],
         ];
 
