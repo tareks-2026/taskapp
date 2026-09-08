@@ -8,8 +8,21 @@
                 class="text-sm {{ request()->routeIs('tasks.index') ? 'font-medium' : 'opacity-80 hover:opacity-100' }}">
                 Übersicht
             </a>
-            <span class="text-sm opacity-80"> Log in </span>
-            <span class="btn btn-primary btn-sm"><a href="{{ route('register') }}"> Register </a></span>
+            @guest
+                <a href="{{ route('login') }}" class="text-sm opacity-80"> Log in </span>
+                <a href="{{ route('register') }}" class="btn btn-primary btn-sm"> Register </a></span>    
+            @endguest
+
+            @auth
+                <span class="text-sm opacity-80"> Hi, {{ auth()->user()->name }} </span>
+                
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-sm">
+                        Log Out
+                    </button>
+                </form>
+            @endauth
         </div>
     </nav>
 </header>
