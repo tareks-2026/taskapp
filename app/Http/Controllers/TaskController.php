@@ -25,4 +25,23 @@ class TaskController extends Controller
         
         return view('tasks.show', compact('task'));  //return view('tasks.show', ['task' => $task]); 
     }
+
+    public function create()
+    {
+        return view('tasks.create');
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'title'         => ['required', 'string', 'max:50'],
+            'description'   => ['required', 'string', 'max:500'],
+        ]);
+        $validated['user_id'] = auth()->id(); // Der aktuell eingeloggte User
+        $validated['done'] = false;
+
+        Task::create($validated);
+
+        return redirect()->route('dashboard')->with('success', 'Aufgabe erfolgreich angelegt');
+    }
 }
