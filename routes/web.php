@@ -25,7 +25,7 @@ Route::middleware('auth')->group(function() {
     Route::resource('tasks', TaskController::class);  
     Route::post('/logout', [SessionController::class, 'destroy'])->name('logout');
     //Dashboard
-    Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
 

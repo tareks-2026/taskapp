@@ -13,7 +13,7 @@ class TaskController extends Controller
         //     return redirect()->route('login'); // Redirect für nicht authorisierte user
         // }
 
-        $tasks = Task::where('done', true)->latest()->paginate(5);
+        $tasks = Task::latest()->paginate(5);
         return view('tasks.index', ['tasks' => $tasks]); //pfadstrukturen mit . nicht mit /
     }
 
