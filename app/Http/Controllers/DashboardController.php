@@ -8,6 +8,13 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('dashboard', ['user' => auth()->user() ]);
+        $user = auth()->user();
+        
+        //welche aufgaben hat der user
+        $tasks = $user->tasks()->latest()->get();
+
+        //Task::where('user_id', $user->id)->latest()->get();
+
+        return view('dashboard', ['user' => $user, 'tasks' => $tasks ]);
     }
 }
