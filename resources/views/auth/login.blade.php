@@ -17,7 +17,7 @@
             <fieldset class="fieldset">
                 <legend>Passwort</legend>
                 <input id="password" type="password" name="password"
-                    class="input w-full {{ $errors->has('passowrd') ? 'input-error' : '' }}">
+                    class="input w-full {{ $errors->has('password') ? 'input-error' : '' }}">
                     @error('password') {{ $message }} @enderror
             </fieldset>
 

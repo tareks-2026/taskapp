@@ -12,7 +12,7 @@ Route::view('/', 'welcome')->name('welcome'); // Kurzschreibform
 
 //Tasks
 Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
-Route::get('/tasks/{task}', [TaskController::class,'show']); // name mit variabler??
+Route::get('/tasks/{task}', [TaskController::class,'show'])->name('tasks.show');
 
 //Registrierung
 Route::get('/register', [RegistrationController::class, 'create'])->name('register');

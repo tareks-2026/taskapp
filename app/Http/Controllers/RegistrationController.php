@@ -20,7 +20,7 @@ class RegistrationController extends Controller
             'password'  => ['required', 'string', 'min:8', 'confirmed'] //confirmed sucht automatisch nach einem feld mit dem namen "password_confirmation"
         ]);
 
-        unset($validated['password_confirmation']); // Unnötig?
+        
         $user = User::create($validated);
         auth()->login($user); //falscher alarm durch vs code, alternativ über facades
 

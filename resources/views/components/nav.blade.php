@@ -5,12 +5,12 @@
         </a>
         <div class="flex items-center gap-3">
             <a href="{{ route('tasks.index') }}"
-                class="text-sm {{ request()->routeIs('tasks.index') || request()->is('tasks/*') ? 'font-medium' : 'opacity-50 hover:opacity-100' }}">
+                class="text-sm {{ request()->routeIs('tasks.*') ? 'font-medium' : 'opacity-50 hover:opacity-100' }}">
                 Übersicht
             </a>
             @guest
-                <a href="{{ route('login') }}" class="text-sm opacity-80"> Log in </span>
-                <a href="{{ route('register') }}" class="btn btn-primary btn-sm"> Register </a></span>    
+                <a href="{{ route('login') }}" class="text-sm opacity-80"> Log in </a>
+                <a href="{{ route('register') }}" class="btn btn-primary btn-sm"> Register </a>
             @endguest
 
             @auth
