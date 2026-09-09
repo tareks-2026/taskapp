@@ -21,9 +21,9 @@
                         <button type="submit" title="{{ $task->done ? 'Wieder öffnen' : 'Als erledigt markieren' }}"
                             class="checkbox {{ $task->done ? 'checkbox-success' : '' }}"
                             {{ $task->done ? 'checked' : '' }}>
-                            {{-- ✓ --}}
-                            Toggle
+                            ✓
                         </button>
+                    </form>
 
                     <a href="{{ route('tasks.show', $task) }}" 
                         class="flex-1 {{ $task->done ? 'opacity-50 line-through' : 'font-medium hover:text-primary' }}">

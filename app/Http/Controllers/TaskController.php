@@ -45,10 +45,27 @@ class TaskController extends Controller
         return redirect()->route('dashboard')->with('success', 'Aufgabe erfolgreich angelegt');
     }
 
+    public function edit(Task $task)
+    {
+
+    }
+
+    public function update(Request $request, Task $task)
+    {
+
+    }
+
+    public function destroy(Task $task)
+    {
+        
+    }
+
+
+
     public function toggle(Task $task)
     {
         //nur der Ersteller darf seine Aufgabe umschalten
-        abort_if($task->user_id !== auth()->id(), 403);
+        // abort_if($task->user_id !== auth()->id(), 403);
 
         $task->done = !$task->done;
         $task->save();
