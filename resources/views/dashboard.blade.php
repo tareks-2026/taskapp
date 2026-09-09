@@ -15,7 +15,15 @@
         <ul class="divide-y divide-base-200">
             @forelse($tasks as $task)
                 <li class="flex items-center gap-4 px-5 py-4">
-                    {{-- Toggle Button Aufgabe erledigt / wieder öffnen --}}
+                    <form action="{{ route('tasks.toggle', $task) }}" method="POST">
+                        @csrf
+                        @method('PATCH')
+                        <button type="submit" title="{{ $task->done ? 'Wieder öffnen' : 'Als erledigt markieren' }}"
+                            class="checkbox {{ $task->done ? 'checkbox-success' : '' }}"
+                            {{ $task->done ? 'checked' : '' }}>
+                            {{-- ✓ --}}
+                            Toggle
+                        </button>
 
                     <a href="{{ route('tasks.show', $task) }}" 
                         class="flex-1 {{ $task->done ? 'opacity-50 line-through' : 'font-medium hover:text-primary' }}">
