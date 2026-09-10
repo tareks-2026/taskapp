@@ -13,12 +13,15 @@ class TaskController extends Controller
         //     return redirect()->route('login'); // Redirect für nicht authorisierte user
         // }
 
-        // dd(Task::latest()
-        // ->when($request->filled('q'), function ($query) use($request){
-        //     $term = '%' . $request->input('q') . '%';
+        //dd zur anzeige des kompletten sql strings
+    //     dd(Task::latest()
+    //     ->when($request->filled('q'), function ($query) use($request){
+    //         $term = '%' . $request->input('q') . '%';
 
-        //     $query->where('title', 'like', $term)->orWhere('description', 'like', $term);
-        //     })->toRawSql());
+    //    $query->where(function ($q) use ($term) {
+    //    $q->where('title', 'like', $term)->orWhere('description', 'like', $term);
+    //    });
+    //     })->toRawSql());
 
         $tasks = Task::latest()
         ->when($request->filled('q'), function ($query) use($request){
@@ -26,9 +29,16 @@ class TaskController extends Controller
 
             $query->where(function ($q) use ($term) {
                 $q->where('title', 'like', $term)->orWhere('description', 'like', $term);
+                // dd($q->toRawSql());
             });
         })
-        ->paginate(5);
+        ->when($request->input('status') === 'open', function($query){
+            $query->where('done', false);
+        })
+        ->when($request->input('status') === 'done', function($query){
+            $query->where('done', true);
+        })
+        ->paginate(5)->withQueryString();
         return view('tasks.index', ['tasks' => $tasks]); //pfadstrukturen mit . nicht mit /
     }
 
