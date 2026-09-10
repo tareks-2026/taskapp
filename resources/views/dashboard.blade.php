@@ -6,11 +6,7 @@
     {{-- @dd(request()->user()); --}}
             <p> Deine Aufgaben </p>
         </div>
-        <form action="{{ route('dashboard') }}" method="GET" class="mt-6 flex gap-2">
-            <input type="text" name="q" value="{{ request('q') }}" 
-                placeholder="Meine Aufgaben durchsuchen" class="input w-full max-w-md">
-            <button type="submit" class="btn btn-primary">Suchen</button>
-        </form>
+        <x-search-form route="dashboard" placeholder="Meine Aufgaben durchsuchen" />
 
         <a href="{{ route('tasks.create') }}" class="btn btn-primary">
             Neue Aufgabe
