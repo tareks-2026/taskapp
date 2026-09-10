@@ -7,13 +7,28 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         // if(! auth()->check()) {
         //     return redirect()->route('login'); // Redirect für nicht authorisierte user
         // }
 
-        $tasks = Task::latest()->paginate(5);
+        // dd(Task::latest()
+        // ->when($request->filled('q'), function ($query) use($request){
+        //     $term = '%' . $request->input('q') . '%';
+
+        //     $query->where('title', 'like', $term)->orWhere('description', 'like', $term);
+        //     })->toRawSql());
+
+        $tasks = Task::latest()
+        ->when($request->filled('q'), function ($query) use($request){
+            $term = '%' . $request->input('q') . '%';
+
+            $query->where(function ($q) use ($term) {
+                $q->where('title', 'like', $term)->orWhere('description', 'like', $term);
+            });
+        })
+        ->paginate(5);
         return view('tasks.index', ['tasks' => $tasks]); //pfadstrukturen mit . nicht mit /
     }
 
@@ -47,6 +62,7 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
+        // muss in edit, update, destroy und toggle, da sonst gefälschte anfragen durchgehen würden
         abort_if($task->user_id !== auth()->id(), 404);
         return view('tasks.edit', compact('task'));
     }
