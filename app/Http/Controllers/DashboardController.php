@@ -13,13 +13,9 @@ class DashboardController extends Controller
         //welche aufgaben hat der user
         $tasks = $user->tasks()
         ->when($request->filled('q'), function ($query) use($request){
-            $term = '%' . $request->input('q') . '%';
-
-            $query->where(function ($q) use ($term) {
-                $q->where('title', 'like', $term)->orWhere('description', 'like', $term);
+            $query->search($request->input('q'));
                 // dd($q->toRawSql());
-            });
-        })
+            })    
         ->latest()->get();
 
         //Task::where('user_id', $user->id)->latest()->get();

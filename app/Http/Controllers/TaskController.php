@@ -25,12 +25,7 @@ class TaskController extends Controller
 
         $tasks = Task::latest()
         ->when($request->filled('q'), function ($query) use($request){
-            $term = '%' . $request->input('q') . '%';
-
-            $query->where(function ($q) use ($term) {
-                $q->where('title', 'like', $term)->orWhere('description', 'like', $term);
-                // dd($q->toRawSql());
-            });
+           $query->search($request->input('q'));
         })
         ->when($request->input('status') === 'open', function($query){
             $query->where('done', false);
