@@ -47,17 +47,29 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
-
+        abort_if($task->user_id !== auth()->id(), 404);
+        return view('tasks.edit', compact('task'));
     }
 
     public function update(Request $request, Task $task)
     {
+        abort_if($task->user_id !== auth()->id(), 404);
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:50'],
+            'description' => ['required', 'string', 'max:500']
+        ]);
 
+        $task->update($validated);
+
+        return redirect()->route('tasks.show', $task)->with('success', 'Aufgabe aktualisiert');
     }
 
     public function destroy(Task $task)
     {
-        
+        abort_if($task->user_id !== auth()->id(), 404);
+        $task->delete();
+
+        return redirect()->route('dashboard')->with('success', 'Aufgabe gelöscht');
     }
 
 
@@ -65,7 +77,7 @@ class TaskController extends Controller
     public function toggle(Task $task)
     {
         //nur der Ersteller darf seine Aufgabe umschalten
-        // abort_if($task->user_id !== auth()->id(), 403);
+        abort_if($task->user_id !== auth()->id(), 403);
 
         $task->done = !$task->done;
         $task->save();
