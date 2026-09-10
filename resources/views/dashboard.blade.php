@@ -25,10 +25,12 @@
                         </button>
                     </form>
 
-                    <a href="{{ route('tasks.show', $task) }}" 
-                        class="flex-1 {{ $task->done ? 'opacity-50 line-through' : 'font-medium hover:text-primary' }}">
-                        {{ $task->title }}
-                    </a>
+                    <div class="flex-1 min-w-0">
+                        <a href="{{ route('tasks.show', $task) }}" 
+                            class="{{ $task->done ? 'opacity-50 line-through' : 'font-medium hover:text-primary' }}">
+                            {{ $task->title }}
+                        </a>
+                    </div>
 
                     <span class="badge badge-sm {{ $task->done ? 'badge-success' : 'badge-ghost' }}">
                         {{ $task->done ? 'Abgeschlossen' : 'Offen' }}

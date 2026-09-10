@@ -14,7 +14,10 @@
             @endguest
 
             @auth
-                <span class="text-sm opacity-80"> Hi, {{ auth()->user()->name }} </span>
+            <a href="{{ route('dashboard') }}"
+                class="{{ request()->routeIs('dashboard') ? 'font-medium' : 'opacity-80 hover:opacity-100' }}">
+                Hi, {{ auth()->user()->name }}
+            </a>
                 
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
