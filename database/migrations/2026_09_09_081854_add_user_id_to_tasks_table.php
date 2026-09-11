@@ -15,7 +15,7 @@ return new class extends Migration
             $table->foreignId('user_id')
             ->nullable() // Da wir bereits task ohne User id haben würde es zu einem fehler kommen ohne nullable
             ->constrained()
-            ->cascadeOnDelete();
+            ->cascadeOnDelete(); //wird der user, der den task erstellt hat, gelöscht, wird auch der task gelöscht
         });
     }
 
@@ -25,7 +25,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('tasks', function (Blueprint $table) {
-            //
+            $table->dropForeign(['user_id']);
+            $table->dropColumn('user_id');
         });
     }
 };
